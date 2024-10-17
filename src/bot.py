@@ -24,7 +24,7 @@ async def info(ctx):
 
 @bot.command() #all command
 async def all(ctx):
-    embed = discord.Embed(title='All Games', description="Genshin Impact\nHonkai: Star Rail\nArknights\nNikke\nFate/Grand Order\nWuthering Waves\nAzur Lane")
+    embed = discord.Embed(title='All Games', description="Genshin Impact\nHonkai: Star Rail\nArknights\nNikke\nFate/Grand Order\nWuthering Waves\nAzur Lane\nPrincess Connect: Re:Dive\nGranblue Fantasy\nAFK Journey")
     await ctx.send(embed=embed)
 
 timezone = pytz.timezone('America/New_York')
@@ -76,6 +76,22 @@ if ALD_time_difference < datetime.timedelta(0):
 ALW_reset_time = now.replace(hour=3, minute=0, second=0) + datetime.timedelta(days=8-now.isoweekday())
 ALW_time_difference = ALW_reset_time - now
 
+#Priconne Lane Weekly Reset
+PCW_reset_time = now.replace(hour=16, minute=0, second=0) + datetime.timedelta(days=7-now.isoweekday())
+PCW_time_difference = PCW_reset_time - now
+
+#AFKJ Daily Reset
+AJD_reset_time = now.replace(hour=20, minute=0, second=0)
+AJD_time_difference = AJD_reset_time - now
+if AJD_time_difference < datetime.timedelta(0):
+    AJD_time_difference += datetime.timedelta(days=1)
+
+#AFKJ Weekly Reset
+AJW_reset_time = now.replace(hour=20, minute=0, second=0) + datetime.timedelta(days=7-now.isoweekday())
+AJW_time_difference = AJW_reset_time - now
+
+
+
 game_info = { #dictionary of games and their reset times
     "Genshin Impact": "NA Daily Reset will be in: " + str(GID_time_difference) + "\nNA Weekly Reset will be in: " + str(GIW_time_difference),
     "Honkai: Star Rail": "NA Daily Reset will be in: " + str(GID_time_difference) + "\nNA Weekly Reset will be in: " + str(GIW_time_difference),
@@ -83,7 +99,10 @@ game_info = { #dictionary of games and their reset times
     "Nikke": "Daily Reset will be in: " + str(NKD_time_difference),
     "Fate/Grand Order": "Daily Reset will be in: " + str(FGOD_time_difference) + "\nWeekly Reset will be in: " + str(FGOW_time_difference),
     "Wuthering Waves": "NA Daily Reset will be in: " + str(GID_time_difference) + "\nNA Weekly Reset will be in: " + str(GIW_time_difference),
-    "Azur Lane": "Daily Reset will be in: " + str(ALD_time_difference) + "\nWeekly Reset will be in: " + str(ALW_time_difference)
+    "Azur Lane": "Daily Reset will be in: " + str(ALD_time_difference) + "\nWeekly Reset will be in: " + str(ALW_time_difference),
+    "Princess Connect: Re:Dive": "JP Daily Reset will be in: " + str(NKD_time_difference) + "\nJP Weekly Reset will be in: " + str(PCW_time_difference),
+    "Granblue Fantasy": "Daily Reset will be in: " + str(NKD_time_difference) + "\nWeekly Reset will be in: " + str(PCW_time_difference),
+    "AFK Journey": "Daily Reset will be in: " + str(AJD_time_difference) + "\nWeekly Reset will be in: " + str(AJW_time_difference)
 }
 
 @bot.command() #search command
